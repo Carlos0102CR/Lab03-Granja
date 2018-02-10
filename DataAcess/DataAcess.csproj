@@ -4,16 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{090A7B26-C807-47CD-AF26-DCA7DCDFD368}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>Lab03_Granja</RootNamespace>
-    <AssemblyName>Lab03-Granja</AssemblyName>
+    <ProjectGuid>{303E74CC-1E4D-4EB9-B2F0-4B34F8FB1D31}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DataAcess</RootNamespace>
+    <AssemblyName>DataAcess</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -42,27 +40,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ProduccionManagement.cs" />
-    <Compile Include="CategoriaManagement.cs" />
-    <Compile Include="AnimalManagement.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="Crud\ProduccionCrudFactory.cs" />
+    <Compile Include="Crud\CategoriaCrudFactory.cs" />
+    <Compile Include="Crud\AnimalCrudFactory.cs" />
+    <Compile Include="Crud\CrudFactory.cs" />
+    <Compile Include="Mapper\ProduccionMapper.cs" />
+    <Compile Include="Mapper\CategoriaMapper.cs" />
+    <Compile Include="Mapper\AnimalMapper.cs" />
+    <Compile Include="Mapper\EntityMapper.cs" />
+    <Compile Include="Mapper\IObjectMapper.cs" />
+    <Compile Include="Mapper\ISqlStaments.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Dao\SqlDao.cs" />
+    <Compile Include="Dao\SqlOperation.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\DataAcess\DataAcess.csproj">
-      <Project>{303E74CC-1E4D-4EB9-B2F0-4B34F8FB1D31}</Project>
-      <Name>DataAcess</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Entities-POJO\Entities-POJO.csproj">
-      <Project>{0f68b956-c774-491b-94f7-ec177d7dbd3c}</Project>
+      <Project>{0F68B956-C774-491B-94F7-EC177D7DBD3C}</Project>
       <Name>Entities-POJO</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Exceptions\Exceptions.csproj">
-      <Project>{de68f413-04db-453b-bf57-1f234503b808}</Project>
-      <Name>Exceptions</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
