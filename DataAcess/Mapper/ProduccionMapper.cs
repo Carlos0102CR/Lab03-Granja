@@ -20,7 +20,7 @@ namespace DataAcess.Mapper
             var operation = new SqlOperation {ProcedureName = "CRE_PRODUCCION_PR"};
 
             var p = (Produccion) entity;
-            operation.AddIntParam(DB_COL_ID_ANIMAL, (int)p.Animal.Id);
+            operation.AddIntParam(DB_COL_ID_ANIMAL,p.IdAnimal);
             operation.AddIntParam(DB_COL_CANTIDAD, p.Cantidad);
             operation.AddDoubleParam(DB_COL_VALOR, p.Valor);
             operation.AddDateTimeParam(DB_COL_FECHA, p.Fecha);
@@ -39,24 +39,25 @@ namespace DataAcess.Mapper
             return operation;
         }
 
-        public SqlOperation GetRetriveDateStatement(DateTime inicio, DateTime final)
+        public SqlOperation GetRetriveDateStatement(BaseEntity entity)
         {
             var operation = new SqlOperation { ProcedureName = "RET_PRODUCCION_DATE_PR" };
-            
-            operation.AddDateTimeParam("FECHA_INICIO", inicio);
-            operation.AddDateTimeParam("FECHA_INICIO", final);
+
+            var c = (Consulta)entity;
+            operation.AddDateTimeParam("FECHA_INICIO", c.FechaInicio);
+            operation.AddDateTimeParam("FECHA_FINAL", c.FechaFinal);
 
             return operation;
         }
 
-        public SqlOperation GetRetriveDateCategoryStatement(DateTime inicio, DateTime final, BaseEntity entity)
+        public SqlOperation GetRetriveDateCategoryStatement(BaseEntity entity)
         {
             var operation = new SqlOperation { ProcedureName = "RET_PRODUCCION_DATE_CATEGORY_PR" };
 
-            var p = (Produccion)entity;
-            operation.AddDateTimeParam("FECHA_INICIO", inicio);
-            operation.AddDateTimeParam("FECHA_INICIO", final);
-            operation.AddIntParam("ID_CATEGORIA", p.Animal.Categoria.Id);
+            var c = (Consulta)entity;
+            operation.AddDateTimeParam("FECHA_INICIO", c.FechaInicio);
+            operation.AddDateTimeParam("FECHA_FINAL", c.FechaFinal);
+            operation.AddIntParam("ID_CATEGORIA", c.IdCategoria);
 
             return operation;
         }
@@ -73,7 +74,7 @@ namespace DataAcess.Mapper
 
             var p = (Produccion)entity;
             operation.AddIntParam(DB_COL_ID, p.Id);
-            operation.AddIntParam(DB_COL_ID_ANIMAL, (int)p.Animal.Id);
+            operation.AddIntParam(DB_COL_ID_ANIMAL, p.IdAnimal);
             operation.AddIntParam(DB_COL_CANTIDAD, p.Cantidad);
             operation.AddDoubleParam(DB_COL_VALOR, p.Valor);
             operation.AddDateTimeParam(DB_COL_FECHA, p.Fecha);
@@ -106,19 +107,16 @@ namespace DataAcess.Mapper
 
         public BaseEntity BuildObject(Dictionary<string, object> row)
         {
-            var animalCrud = new ProduccionCrudFactory();
-            var animal = new Animal(GetIntValue(row, DB_COL_ID_ANIMAL));
-            animal = animalCrud.Retrieve<Animal>(animal);
             var produccion = new Produccion
             {
                 Id = GetIntValue(row, DB_COL_ID),
-                Animal = animal,
+                IdAnimal = GetIntValue(row, DB_COL_ID_ANIMAL),
                 Cantidad = GetIntValue(row, DB_COL_CANTIDAD),
                 Valor = GetDoubleValue(row, DB_COL_VALOR),
                 Fecha = GetDateValue(row, DB_COL_FECHA)
             };
 
-            return animal;
+            return produccion;
         }       
 
     }

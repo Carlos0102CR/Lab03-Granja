@@ -69,12 +69,12 @@ namespace DataAcess.Crud
             dao.ExecuteProcedure(mapper.GetDeleteStatement(animal));
         }
 
-        public override List<T> RetrieveByDate<T>(DateTime inicio, DateTime final)
+        public override List<T> RetrieveByDate<T>(BaseEntity entity)
         {
             throw new NotImplementedException();
         }
 
-        public override List<T> RetrieveByDateAndCategory<T>(DateTime inicio, DateTime final, BaseEntity entity)
+        public override List<T> RetrieveByDateAndCategory<T>(BaseEntity entity)
         {
             throw new NotImplementedException();
         }

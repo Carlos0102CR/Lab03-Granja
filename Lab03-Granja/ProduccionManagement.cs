@@ -34,14 +34,14 @@ namespace Testing
             return crudProduccion.Retrieve<Produccion>(produccion);
         }
 
-        public List<Produccion> RetrieveByDate(DateTime inicio, DateTime final)
+        public List<Produccion> RetrieveByDate(Consulta consulta)
         {
-            return crudProduccion.RetrieveByDate<Produccion>(inicio,final);
+            return crudProduccion.RetrieveByDate<Produccion>(consulta);
         }
 
-        public List<Produccion> RetrieveByDateAndCategory(DateTime inicio, DateTime final, Produccion produccion)
+        public List<Produccion> RetrieveByDateAndCategory(Consulta consulta)
         {
-            return crudProduccion.RetrieveByDateAndCategory<Produccion>(inicio, final, produccion);
+            return crudProduccion.RetrieveByDateAndCategory<Produccion>(consulta);
         }
 
         internal void Update(Produccion produccion)

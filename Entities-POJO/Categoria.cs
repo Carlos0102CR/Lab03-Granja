@@ -17,17 +17,11 @@ namespace Entities_POJO
 
         }
 
-        public Categoria(int id)
-        {
-            Id = id;
-        }
-
         public Categoria(string[] infoArray)
         {
-            if(infoArray!=null && infoArray.Length >= 3){
-                Id = int.Parse(infoArray[0]);
-                Nombre = infoArray[1];
-                Unidad = infoArray[2];
+            if(infoArray!=null && infoArray.Length >= 2){
+                Nombre = infoArray[0];
+                Unidad = infoArray[1];
             }
             else
             {

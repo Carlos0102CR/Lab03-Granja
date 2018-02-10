@@ -39,11 +39,11 @@ namespace DataAcess.Crud
             return default(T);
         }
 
-        public override List<T> RetrieveByDate<T>(DateTime inicio, DateTime final)
+        public override List<T> RetrieveByDate<T>(BaseEntity entity)
         {
             var lstProducciones = new List<T>();
 
-            var lstResult = dao.ExecuteQueryProcedure(mapper.GetRetriveDateStatement(inicio,final));
+            var lstResult = dao.ExecuteQueryProcedure(mapper.GetRetriveDateStatement(entity));
             var dic = new Dictionary<string, object>();
             if (lstResult.Count > 0)
             {
@@ -57,11 +57,11 @@ namespace DataAcess.Crud
             return lstProducciones;
         }
 
-        public override List<T> RetrieveByDateAndCategory<T>(DateTime inicio, DateTime final, BaseEntity entity)
+        public override List<T> RetrieveByDateAndCategory<T>(BaseEntity entity)
         {
             var lstProducciones = new List<T>();
 
-            var lstResult = dao.ExecuteQueryProcedure(mapper.GetRetriveDateCategoryStatement(inicio, final,entity));
+            var lstResult = dao.ExecuteQueryProcedure(mapper.GetRetriveDateCategoryStatement(entity));
             var dic = new Dictionary<string, object>();
             if (lstResult.Count > 0)
             {

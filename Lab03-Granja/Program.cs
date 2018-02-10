@@ -81,8 +81,7 @@ namespace Testing
         {
             var pmng = new ProduccionManagemment();
             var produccion = new Produccion();
-            var animal = new Animal();
-            var categoria = new Categoria();
+            var consulta = new Consulta();
 
             Console.WriteLine("***    Registros de Produccion    ***");
             Console.WriteLine("1.Ingresar la produccion de un animal");
@@ -101,13 +100,11 @@ namespace Testing
                     Console.WriteLine("*****     Crear     *******");
                     Console.WriteLine("***************************");
                     imprimirAnimales();
-                    Console.WriteLine("Escriba id del animal al que pertenece el registro de produccion:");
-                    animal.Id = int.Parse(Console.ReadLine());
-                    Console.WriteLine("Escriba la cantidad, valor en cenfodolares y fecha del registro(yyyy/MM/dd), separados por coma:");
+                    Console.WriteLine("Escriba el id del animal, cantidad, valor en cenfodolares y fecha del registro(yyyy/MM/dd), separados por coma:");
                     var info = Console.ReadLine();
                     var infoArray = info.Split(',');
 
-                    produccion = new Produccion(infoArray, animal);
+                    produccion = new Produccion(infoArray);
                     pmng.Create(produccion);
 
                     Console.WriteLine("El registro fue ingresado");
@@ -125,7 +122,8 @@ namespace Testing
                     Console.WriteLine("Escriba la fecha de inicio(yyyy/MM/dd) y fecha final(yyyy/MM/dd) de los registros que desea buscar, separados por coma:");
                     info = Console.ReadLine();
                     infoArray = info.Split(',');
-                    var lstProducciones = pmng.RetrieveByDate(DateTime.Parse(infoArray[0]), DateTime.Parse(infoArray[1]));
+                    consulta = new Consulta(infoArray);
+                    var lstProducciones = pmng.RetrieveByDate(consulta);
                     var count = 0;
 
                     foreach (var p in lstProducciones)
@@ -140,10 +138,10 @@ namespace Testing
                     Console.WriteLine("***** Buscar por fecha y categoria ****");
                     Console.WriteLine("***************************************");
                     Console.WriteLine("Escriba la fecha de inicio(yyyy/MM/dd), fecha final(yyyy/MM/dd) y el id de la categoria de animal, de los registros de produccion que desea buscar , separados por coma:");
-                     info = Console.ReadLine();
-                     infoArray = info.Split(',');
-                    produccion.Animal.Categoria.Id = int.Parse(infoArray[2]);
-                    lstProducciones = pmng.RetrieveByDateAndCategory(DateTime.Parse(infoArray[0]), DateTime.Parse(infoArray[1]),produccion);
+                    info = Console.ReadLine();
+                    infoArray = info.Split(',');
+                    consulta = new Consulta(infoArray);
+                    lstProducciones = pmng.RetrieveByDateAndCategory(consulta);
                     count = 0;
 
                     foreach (var p in lstProducciones)
@@ -204,17 +202,15 @@ namespace Testing
             switch (option)
             {
                 case "1":
+                    imprimirCategorias();
                     Console.WriteLine("***************************");
                     Console.WriteLine("*****     Crear     *******");
                     Console.WriteLine("***************************");
-                    imprimirCategorias();
-                    Console.WriteLine("Escriba id de la categoria a la que pertenece el animal:");
-                    categoria.Id = int.Parse(Console.ReadLine());
-                    Console.WriteLine("Escriba el nombre, edad, fecha de nacimiento(yyyy/MM/dd) y alimento favorito del animal, separados por coma:");
+                    Console.WriteLine("Escriba el id de la categoria, nombre, edad, fecha de nacimiento(yyyy/MM/dd) y alimento favorito del animal, separados por coma:");
                     var info = Console.ReadLine();
                     var infoArray = info.Split(',');
 
-                    animal = new Animal(infoArray, categoria);
+                    animal = new Animal(infoArray);
                     amng.Create(animal);
 
                     Console.WriteLine("El animal fue registrado");

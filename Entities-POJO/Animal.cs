@@ -9,7 +9,7 @@ namespace Entities_POJO
     public class Animal : BaseEntity
     {
         public int Id { get; set; }
-        public Categoria Categoria { get; set; }
+        public int IdCategoria { get; set; }
         public string Nombre { get; set; }
         public int Edad { get; set; }
         public DateTime FechaNacimiento { get; set; }
@@ -20,16 +20,10 @@ namespace Entities_POJO
             
         }
 
-        public Animal(int id)
+        public Animal(string[] infoArray)
         {
-            Id = id;
-        }
-
-        public Animal(string[] infoArray, Categoria categoria)
-        {
-            if(infoArray!=null && infoArray.Length >= 5){
-                Id = int.Parse(infoArray[0]);
-                Categoria = categoria;
+            if(infoArray!=null && infoArray.Length >=5){
+                IdCategoria = int.Parse(infoArray[0]);
                 Nombre = infoArray[1];
                 var edad = 0;
                 if (Int32.TryParse(infoArray[2], out edad))

@@ -20,7 +20,7 @@ namespace DataAcess.Mapper
             var operation = new SqlOperation {ProcedureName = "CRE_ANIMAL_PR"};
 
             var a = (Animal) entity;
-            operation.AddIntParam(DB_COL_ID_CATEGORIA, a.Categoria.Id);
+            operation.AddIntParam(DB_COL_ID_CATEGORIA, a.IdCategoria);
             operation.AddVarcharParam(DB_COL_NOMBRE, a.Nombre);
             operation.AddIntParam(DB_COL_EDAD, a.Edad);
             operation.AddDateTimeParam(DB_COL_FECHA_NACIMIENTO, a.FechaNacimiento);
@@ -52,7 +52,7 @@ namespace DataAcess.Mapper
 
             var a = (Animal)entity;
             operation.AddIntParam(DB_COL_ID, a.Id);
-            operation.AddIntParam(DB_COL_ID_CATEGORIA, a.Categoria.Id);
+            operation.AddIntParam(DB_COL_ID_CATEGORIA, a.IdCategoria);
             operation.AddVarcharParam(DB_COL_NOMBRE, a.Nombre);
             operation.AddIntParam(DB_COL_EDAD, a.Edad);
             operation.AddDateTimeParam(DB_COL_FECHA_NACIMIENTO, a.FechaNacimiento);
@@ -85,13 +85,10 @@ namespace DataAcess.Mapper
 
         public BaseEntity BuildObject(Dictionary<string, object> row)
         {
-            var categoriaCrud = new CategoriaCrudFactory();
-            var categoria = new Categoria(GetIntValue(row, DB_COL_ID_CATEGORIA));
-            categoria = categoriaCrud.Retrieve<Categoria>(categoria);
             var animal = new Animal
             {
                 Id = GetIntValue(row, DB_COL_ID),
-                Categoria = categoria,
+                IdCategoria = GetIntValue(row, DB_COL_ID_CATEGORIA),
                 Nombre = GetStringValue(row, DB_COL_NOMBRE),
                 Edad = GetIntValue(row, DB_COL_EDAD),
                 FechaNacimiento = GetDateValue(row, DB_COL_FECHA_NACIMIENTO),

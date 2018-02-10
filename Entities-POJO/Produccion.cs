@@ -9,7 +9,7 @@ namespace Entities_POJO
     public class Produccion : BaseEntity
     {
         public int Id { get; set; }
-        public Animal Animal { get; set; }
+        public int IdAnimal { get; set; }
         public int Cantidad { get; set; }
         public double Valor { get; set; }
         public DateTime Fecha { get; set; }
@@ -19,15 +19,13 @@ namespace Entities_POJO
             
         }
 
-        public Produccion(string[] infoArray,Animal animal)
+        public Produccion(string[] infoArray)
         {
             if(infoArray!=null && infoArray.Length >= 4){
-                Id = int.Parse(infoArray[0]);
-                Animal = animal;
+                IdAnimal = int.Parse(infoArray[0]);
                 Cantidad = int.Parse(infoArray[1]);
                 Valor = float.Parse(infoArray[2]);
                 Fecha = DateTime.Parse(infoArray[3]);
-
             }
             else
             {
